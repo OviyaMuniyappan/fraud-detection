@@ -1,0 +1,21 @@
+{
+  "name": "fraud-backend",
+  "version": "1.0.0",
+  "description": "Fraud Detection System",
+  "main": "index.js",
+  "scripts": {
+    "start": "node services/server.js"
+  },
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "cors": "^2.8.5",
+    "dotenv": "^16.5.0",
+    "express": "^4.17.1",
+    "twilio": "^3.63.0"
+  },
+  "engines": {
+    "node": ">=14.0.0"
+  },
+  "author": "",
+  "license": "ISC"
+}

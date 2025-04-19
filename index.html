@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>INSTA ALERT 🛡️</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <div class="container">
+    <h1>INSTA ALERT 🛡️</h1>
+
+    <!-- Transaction Form -->
+    <form id="transactionForm">
+      <div class="input-group">
+        <label for="phoneNumber">Phone Number</label>
+        <input type="text" id="phoneNumber" required placeholder="Enter phone number"/>
+      </div>
+
+      <div class="input-group">
+        <label for="amount">Transaction Amount (₹)</label>
+        <input type="number" id="amount" required />
+      </div>
+
+      <div class="input-group">
+        <label for="device">Device Used</label>
+        <select id="device" required>
+          <option value="">Select Device</option>
+          <option value="Mobile">Mobile</option>
+          <option value="Desktop">Desktop</option>
+          <option value="ATM">ATM</option>
+        </select>
+      </div>
+
+      <div class="input-group">
+        <label for="location">Transaction Location</label>
+        <input type="text" id="location" required />
+      </div>
+
+      <button type="submit">Submit Transaction</button>
+    </form>
+
+    <!-- Alert Popup -->
+    <div id="alertPopup" class="popup hidden">
+      <p id="alertMessage">Did you approve this transaction?</p>
+      <button id="yesBtn">Yes, it's me</button>
+      <button id="noBtn">No, not me!</button>
+    </div>
+  </div>
+  <script>
+    document.getElementById('transaction-form').addEventListener('submit', function(event) {
+      event.preventDefault();
+  
+      const transaction = {
+        amount: parseFloat(document.getElementById('amount').value),
+        userPhoneNumber: document.getElementById('phone').value
+      };
+  
+      fetch('http://localhost:3000/check-transaction', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ transaction })
+      })
+      .then(response => response.json())
+      .then(data => {
+        console.log('Success:', data);
+        alert(data.message);
+      })
+      .catch((error) => {
+        console.error('Error:', error);
+      });
+    });
+  </script>
+  
+  
+  
+</body>
+</html>
+
